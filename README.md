@@ -8,7 +8,6 @@ Run npm install vscode under this repo.
 Run `code .` and press `F5` to debug in a new instance of VSCode. Make changes and `F5` to see changes.
 
 ## TODO
-- The sexp skipper needs to parse strings correctly.
 - It also needs to parse RegExp's correctly.
 
 ## Operation

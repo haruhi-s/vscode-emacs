@@ -2,7 +2,7 @@
 	"name": "vscode-emacs",
 	"displayName": "Emacs Keybindings with S-exp",
 	"description": "emacs like extension for vscode *with sexp support*",
-	"version": "0.1.4",
+	"version": "0.1.5",
 	"publisher": "haruhi-s",
 	"homepage": "https://github.com/haruhi-s/vscode-emacs",
 	"repository": {
@@ -60,6 +60,10 @@
 			}
 		],
 		"keybindings": [
+			{
+				"command": "insertReturn",
+				"key": "ctrl+m"
+			},
 			{
 				"command": "emacs.slurpSexp",
 				"key": "ctrl+alt+space"
@@ -215,7 +219,8 @@
 				"key": "alt+backspace",
 				"command": "deleteWordLeft",
 				"when": "editorTextFocus"
-			},{
+			},
+			{
 				"key": "alt+d",
 				"command": "deleteWordRight",
 				"when": "editorTextFocus"

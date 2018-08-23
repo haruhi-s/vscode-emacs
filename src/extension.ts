@@ -128,7 +128,15 @@ export function activate(context: vscode.ExtensionContext): void {
             move(-n);
         });
     }
+    function insertReturn() {
+        let callback = (editBuilder:vscode.TextEditorEdit) => {
+            let currentSelection = vscode.window.activeTextEditor.selection;
+            editBuilder.insert(currentSelection.active, "\n");
+        }
+        vscode.window.activeTextEditor.edit(callback);
+    }
     let subs = context.subscriptions;
+    subs.push(vscode.commands.registerCommand('insertReturn', () => insertReturn()));
     subs.push(vscode.commands.registerCommand('emacs.moveForwardSexp', () => moveForwardSexp()));
     subs.push(vscode.commands.registerCommand('emacs.moveBackwardSexp', () => moveBackwardSexp()));
     subs.push(vscode.commands.registerCommand('emacs.slurpSexp', () => slurpSexp()));
