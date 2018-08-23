@@ -4,20 +4,20 @@ import { Operation } from './operation';
 var inMarkMode: boolean = false;
 export function activate(context: vscode.ExtensionContext): void {
     //Start of my change
-    function nextSexpEnd(s) {
+    function nextSexpEnd(s: string) {
         let atom_ = '\'"[](){} \t\n\r.,<>-+*/=!@#$%^&|\\~;';
         let symbol = '.,<>-+*/=!@#$%^&|\\~;';
         let spaces = ' \r\n\t';
         let pos = 0;
-        function skip(that, toInclude) {
+        function skip(that: string, toInclude: boolean) {
             while (pos < s.length && toInclude === that.includes(s[pos])) {
                 pos++;
             }
         }
-        function skipQ(Q) {
+        function skipQ(Q: string) {
             pos++;
             while (pos < s.length && s[pos] !== Q) {
-                if (s[pos] == '\\') {
+                if (s[pos] === '\\') {
                     pos += 2;
                 } else {
                     pos++;
@@ -47,7 +47,7 @@ export function activate(context: vscode.ExtensionContext): void {
             }
             return;
         }
-        function skipParens(par) {
+        function skipParens(par: string) {
             pos++;
             while (s[pos] !== par) {
                 if (pos >= s.length) {
@@ -55,7 +55,7 @@ export function activate(context: vscode.ExtensionContext): void {
                 }
                 let oldPos = pos;
                 skipSexp();
-                if (oldPos == pos) {
+                if (oldPos === pos) {
                     break;
                 }
             }
@@ -65,7 +65,7 @@ export function activate(context: vscode.ExtensionContext): void {
         skipSexp();
         return pos;
     }
-    function selectionChanger(func) {
+    function selectionChanger(func: (editor: vscode.TextEditor, doc: vscode.TextDocument) => any) {
         let editor = vscode.window.activeTextEditor;
         if (!editor) {
             return;
@@ -73,16 +73,43 @@ export function activate(context: vscode.ExtensionContext): void {
         let doc = editor.document;
         func(editor, doc);
     }
-    function getCurrentOffset(editor, doc) {
+    function getCurrentOffset(editor: vscode.TextEditor, doc: vscode.TextDocument) {
         return doc.offsetAt(editor.selection.active);
     }
-    function move(offset) {
+    function reverse(s: string) {
+        return s.split('').reverse().map((s) => {
+            if (s === '(') {
+                return ')';
+            }
+            else if (s === ')') {
+                return '(';
+            }
+            else if (s === '{') {
+                return '}';
+            }
+            else if (s === '}') {
+                return '{';
+            }
+            else if (s === '[') {
+                return ']';
+            }
+            else if (s === ']') {
+                return '[';
+            }
+            else {
+                return s;
+            }
+        }).join('');
+    }
+    function move(offset: number) {
         selectionChanger((editor, doc) => {
+            let t = inMarkMode;
             let currentOffset = getCurrentOffset(editor, doc);
             let anchor = editor.selection.anchor;
             let newOffset = currentOffset + offset;
             let newActive = doc.positionAt(newOffset);
             editor.selection = new vscode.Selection(inMarkMode ? anchor : newActive, newActive);
+            inMarkMode = t;
         });
     }
     function moveForwardSexp() {
@@ -103,31 +130,20 @@ export function activate(context: vscode.ExtensionContext): void {
             editor.selection = new vscode.Selection(newAnchor, editor.selection.active);
         });
     }
+    function barfSexp() {
+        selectionChanger((editor, doc) => {
+            let anchorOffset = doc.offsetAt(editor.selection.anchor);
+            let s = reverse(doc.getText().slice(0, anchorOffset));
+            console.log(s);
+            let n = nextSexpEnd(s);
+            anchorOffset -= n;
+            let newAnchor = doc.positionAt(anchorOffset);
+            editor.selection = new vscode.Selection(newAnchor, editor.selection.active);
+        });
+    }
     function moveBackwardSexp() {
         selectionChanger((editor, doc) => {
-            let s = doc.getText().slice(0, getCurrentOffset(editor, doc)).split('').reverse().map((s) => {
-                if (s === '(') {
-                    return ')';
-                }
-                else if (s === ')') {
-                    return '(';
-                }
-                else if (s === '{') {
-                    return '}';
-                }
-                else if (s === '}') {
-                    return '{';
-                }
-                else if (s === '[') {
-                    return ']';
-                }
-                else if (s === ']') {
-                    return '[';
-                }
-                else {
-                    return s;
-                }
-            }).join('');
+            let s = reverse(doc.getText().slice(0, getCurrentOffset(editor, doc)));
             let n = nextSexpEnd(s);
             move(-n);
         });
@@ -144,6 +160,7 @@ export function activate(context: vscode.ExtensionContext): void {
     subs.push(vscode.commands.registerCommand('emacs.moveForwardSexp', () => moveForwardSexp()));
     subs.push(vscode.commands.registerCommand('emacs.moveBackwardSexp', () => moveBackwardSexp()));
     subs.push(vscode.commands.registerCommand('emacs.slurpSexp', () => slurpSexp()));
+    subs.push(vscode.commands.registerCommand('emacs.barfSexp', () => barfSexp()));
     //end of my change
 
     let op = new Operation(),

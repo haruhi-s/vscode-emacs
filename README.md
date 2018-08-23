@@ -77,6 +77,7 @@ Use `Shift+Insert` to paste from clipboard.
 | `M-/(dabbrev)` | - | Auto-completion |
 | `M-num command` | - | Repeat command `num` times |
 | `C-M-SPC` | OK | Slurp one s-exp forward |
+| `C-M-S-SPC` | OK | Barf one s-exp forward |
 
 ### File Command
 |Command | Status | Desc |

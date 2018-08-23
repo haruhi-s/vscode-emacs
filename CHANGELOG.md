@@ -1,3 +1,6 @@
+## 0.1.7 
+- Added barf sexp so there's accurate control over the selection.
+
 ## 0.1.6
 - Support for symbols
 

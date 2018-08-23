@@ -2,7 +2,7 @@
 	"name": "vscode-emacs",
 	"displayName": "Emacs Keybindings with S-exp",
 	"description": "emacs like extension for vscode *with sexp support*",
-	"version": "0.1.6",
+	"version": "0.1.7",
 	"publisher": "haruhi-s",
 	"homepage": "https://github.com/haruhi-s/vscode-emacs",
 	"repository": {
@@ -65,6 +65,9 @@
 				"key": "ctrl+m"
 			},
 			{
+				"command": "emacs.barfSexp",
+				"key": "ctrl+alt+shift+space"
+			},{
 				"command": "emacs.slurpSexp",
 				"key": "ctrl+alt+space"
 			},
