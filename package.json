@@ -2,7 +2,7 @@
 	"name": "vscode-emacs",
 	"displayName": "Emacs Keybindings with S-exp",
 	"description": "emacs like extension for vscode *with sexp support*",
-	"version": "0.1.5",
+	"version": "0.1.6",
 	"publisher": "haruhi-s",
 	"homepage": "https://github.com/haruhi-s/vscode-emacs",
 	"repository": {

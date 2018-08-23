@@ -6,7 +6,7 @@ export function activate(context: vscode.ExtensionContext): void {
     //Start of my change
     function nextSexpEnd(s) {
         let atom_ = '\'"[](){} \t\n\r.,<>-+*/=!@#$%^&|\\~;';
-        let symbol = '.,<>-+*/=!@#$%^&|\\~';
+        let symbol = '.,<>-+*/=!@#$%^&|\\~;';
         let spaces = ' \r\n\t';
         let pos = 0;
         function skip(that, toInclude) {

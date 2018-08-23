@@ -1,3 +1,6 @@
+## 0.1.6
+- Support for symbols
+
 ## 0.1.5
 - Support for strings as sexp's
 - ctrl-m as enter
