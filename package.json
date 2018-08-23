@@ -1,7 +1,7 @@
 {
 	"name": "vscode-emacs",
 	"displayName": "Emacs Keymap",
-	"description": "emacs like extension for vscode",
+	"description": "emacs like extension for vscode *with sexp support*",
 	"version": "0.1.3",
 	"publisher": "haruhi-s",
 	"homepage": "https://github.com/haruhi-s/vscode-emacs",

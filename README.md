@@ -11,6 +11,8 @@ Use `Shift+Insert` to paste from clipboard.
 |--------|--------|------|
 | `C-f` | OK | Move forward |
 | `C-b` | OK | Move backward |
+| `C-M-f` | OK | Move forward by one s-exp |
+| `C-M-b` | OK | Move backward by one s-exp |
 | `C-n` | OK | Move to the next line |
 | `C-p` | OK | Move to the previous line |
 | `C-a` | OK | Move to the beginning of line |
@@ -64,7 +66,7 @@ Use `Shift+Insert` to paste from clipboard.
 | `M-x` | OK | Open command palette |
 | `M-/(dabbrev)` | - | Auto-completion |
 | `M-num command` | - | Repeat command `num` times |
-| `C-M-SPC` | OK | Toggle SideBar visibility |
+| `C-M-SPC` | OK | Slurp one s-exp forward |
 
 ### File Command
 |Command | Status | Desc |
