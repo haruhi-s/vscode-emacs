@@ -2,6 +2,11 @@
 
 This is emacs like plugin for Visual Studio Code.
 
+## Building
+Run git clone for this repo.
+Run npm install vscode under this repo.
+Run `code .` and press `F5` to debug in a new instance of VSCode. Make changes and `F5` to see changes.
+
 ## Operation
 Use `Shift+DEL` to cut to clipboard, the `Ctrl+C` is not overridden.
 Use `Shift+Insert` to paste from clipboard.
