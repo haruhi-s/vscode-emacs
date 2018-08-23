@@ -6,33 +6,45 @@ export function activate(context: vscode.ExtensionContext): void {
     //Start of my change
     function nextSexpEnd(s) {
         let atom_ = '[](){} \t\n\r';
-        let whites = ' \r\n\t';
+        let spaces = ' \r\n\t';
         let pos = 0;
         function skip(that, toInclude) {
             while (pos < s.length && toInclude === that.includes(s[pos])) {
                 pos++;
             }
         }
+        function skipQ(Q) {
+            pos++;
+            while (pos < s.length && s[pos] !== Q) {
+                if (s[pos] == '\\') {
+                    pos += 2;
+                } else {
+                    pos++;
+                }
+            }
+            pos++;
+        }
         function skipSexp() {
-            skip(whites, true);
-            if (!atom_.includes(s[pos])) {
+            skip(spaces, true);
+            if ('"\''.includes(s[pos])) {
+                skipQ(s[pos]);
+            }
+            else if (!atom_.includes(s[pos])) {
                 skip(atom_, false);
             }
             else if (s[pos] === '(') {
-                pos++;
                 skipParens(')');
             }
             else if (s[pos] === '[') {
-                pos++;
                 skipParens(']');
             }
             else if (s[pos] === '{') {
-                pos++;
                 skipParens('}');
             }
             return;
         }
         function skipParens(par) {
+            pos++;
             while (s[pos] !== par) {
                 if (pos >= s.length) {
                     return;
