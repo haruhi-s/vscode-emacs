@@ -42,6 +42,7 @@ Use `Shift+Insert` to paste from clipboard.
 | `C-d` | OK | Delete right (DEL) |
 | `C-h` | OK | Delete left (BACKSPACE) |
 | `M-d` | OK | Delete word |
+| `M-backspace` | OK | Delete word left |
 | `C-k` | OK | Kill to line end |
 | `C-w` | OK | Kill region |
 | `M-w` | OK | Copy region to kill ring |

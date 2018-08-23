@@ -4,7 +4,6 @@ import { Operation } from './operation';
 var inMarkMode: boolean = false;
 export function activate(context: vscode.ExtensionContext): void {
     //Start of my change
-    console.log('Congratulations, your extension "Emacs" is now sexp-capable!');
     function nextSexpEnd(s) {
         let atom_ = '[](){} \t\n\r';
         let whites = ' \r\n\t';
@@ -74,7 +73,6 @@ export function activate(context: vscode.ExtensionContext): void {
         selectionChanger((editor, doc) => {
             let s = doc.getText().slice(getCurrentOffset(editor, doc));
             let n = nextSexpEnd(s);
-            console.log(n);
             move(n);
         });
     }
@@ -115,12 +113,11 @@ export function activate(context: vscode.ExtensionContext): void {
                 }
             }).join('');
             let n = nextSexpEnd(s);
-            console.log(n);
             move(-n);
         });
     }
     let subs = context.subscriptions;
-    subs.push(vscode.commands.registerCommand('emacs.moveForwardSexp', () => {}));
+    subs.push(vscode.commands.registerCommand('emacs.moveForwardSexp', () => moveForwardSexp()));
     subs.push(vscode.commands.registerCommand('emacs.moveBackwardSexp', () => moveBackwardSexp()));
     subs.push(vscode.commands.registerCommand('emacs.slurpSexp', () => slurpSexp()));
     //end of my change

@@ -2,7 +2,7 @@
 	"name": "vscode-emacs",
 	"displayName": "Emacs Keymap",
 	"description": "emacs like extension for vscode *with sexp support*",
-	"version": "0.1.3",
+	"version": "0.1.4",
 	"publisher": "haruhi-s",
 	"homepage": "https://github.com/haruhi-s/vscode-emacs",
 	"repository": {
@@ -212,6 +212,10 @@
 				"when": "editorTextFocus"
 			},
 			{
+				"key": "alt+backspace",
+				"command": "deleteWordLeft",
+				"when": "editorTextFocus"
+			},{
 				"key": "alt+d",
 				"command": "deleteWordRight",
 				"when": "editorTextFocus"
