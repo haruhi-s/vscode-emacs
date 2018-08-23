@@ -1,5 +1,6 @@
 ## 0.1.5
 - Support for strings as sexp's
+- ctrl-m as enter
 
 ## 0.1.4
 - Added sexp movements and slurping

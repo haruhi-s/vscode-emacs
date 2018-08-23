@@ -49,6 +49,7 @@ Use `Shift+Insert` to paste from clipboard.
 |--------|--------|------|
 | `C-d` | OK | Delete right (DEL) |
 | `C-h` | OK | Delete left (BACKSPACE) |
+| `C-m` | OK | Carrier return (return) |
 | `M-d` | OK | Delete word |
 | `M-backspace` | OK | Delete word left |
 | `C-k` | OK | Kill to line end |
