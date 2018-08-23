@@ -5,7 +5,8 @@ var inMarkMode: boolean = false;
 export function activate(context: vscode.ExtensionContext): void {
     //Start of my change
     function nextSexpEnd(s) {
-        let atom_ = '[](){} \t\n\r';
+        let atom_ = '\'"[](){} \t\n\r.,<>-+*/=!@#$%^&|\\~;';
+        let symbol = '.,<>-+*/=!@#$%^&|\\~';
         let spaces = ' \r\n\t';
         let pos = 0;
         function skip(that, toInclude) {
@@ -31,6 +32,9 @@ export function activate(context: vscode.ExtensionContext): void {
             }
             else if (!atom_.includes(s[pos])) {
                 skip(atom_, false);
+            }
+            else if (symbol.includes(s[pos])) {
+                skip(symbol, true);
             }
             else if (s[pos] === '(') {
                 skipParens(')');
@@ -129,7 +133,7 @@ export function activate(context: vscode.ExtensionContext): void {
         });
     }
     function insertReturn() {
-        let callback = (editBuilder:vscode.TextEditorEdit) => {
+        let callback = (editBuilder: vscode.TextEditorEdit) => {
             let currentSelection = vscode.window.activeTextEditor.selection;
             editBuilder.insert(currentSelection.active, "\n");
         }
