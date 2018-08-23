@@ -1,11 +1,15 @@
 # vscode-emacs
 
-This is emacs like plugin for Visual Studio Code.
+This is emacs like plugin for Visual Studio Code. Now with sexp support. 
 
 ## Building
 Run git clone for this repo.
 Run npm install vscode under this repo.
 Run `code .` and press `F5` to debug in a new instance of VSCode. Make changes and `F5` to see changes.
+
+## TODO
+- The sexp skipper needs to parse strings correctly.
+- It also needs to parse RegExp's correctly.
 
 ## Operation
 Use `Shift+DEL` to cut to clipboard, the `Ctrl+C` is not overridden.
